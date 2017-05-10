@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route,Switch,Link } from 'react-router-dom'
+import { Route,Link } from 'react-router-dom'
 
 export const Page = (props) => {
     const {children} = props;
@@ -26,13 +26,11 @@ export const RenderRouters = (props) => {
     if(typeof props.routes === 'undefined'){
         return null
     }
-    if(props.top){
-        return (<Switch>{props.routes.map((route, index)=>{
-            return <Route path={route.path} component={route.component} render={route.render} key={index} />
-        })}</Switch>)
-    }else{
-        return (<div>{props.routes.map((route, index)=>{
-            return <Route path={route.path} component={route.component} render={route.render} key={index} />
-        })}</div>)
+    var Parent = "div"
+    if(typeof props.parent !== 'undefined'){
+        Parent = props.parent
     }
+    return (<Parent>{props.routes.map((route, index)=>{
+        return <Route path={route.path} component={route.component} render={route.render} key={index} />
+    })}</Parent>)
 }
